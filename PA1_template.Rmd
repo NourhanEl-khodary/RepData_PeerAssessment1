@@ -66,6 +66,23 @@ rownames(intervals)[apply(intervals,2,which.max)]
 
 ## Imputing missing values
 
+1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
+
+```{r}
+sum(!complete.cases(activity))
+```
+
+2. Devise a strategy for filling in all of the missing values in the dataset. Will use the mean for that 5-minute interval as it gets the approximate value at that time. We use the intervals data frame created before containing the interval and its mean (average).
+
+```{r}
+for(i in 1:nrow(activity))
+{
+        if(is.na(activity[i,"steps"]))
+        {
+                activity[i,"steps"] <- intervals[as.character(activity[i,"interval"]),]
+        }
+}
+```
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
