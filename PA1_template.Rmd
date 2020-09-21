@@ -33,7 +33,19 @@ title(xlab = "Date", line = 4)
 title(ylab = "Number of Steps", line = 4)
 ```
 
+2. Calculate and report the mean and median total number of steps taken per day.
 
+```{r}
+## Mean
+mean <- as.data.frame(tapply(activity$steps, activity$date, mean, na.rm = TRUE))
+names(mean)[1] <- "Mean"
+mean
+
+## Median
+median <- as.data.frame(tapply(activity$steps, activity$date, median, na.rm = TRUE))
+names(median)[1] <- "Median"
+median
+```
 
 ## What is the average daily activity pattern?
 
