@@ -37,9 +37,9 @@ title(ylab = "Number of Steps", line = 4)
 
 ```{r}
 ## Mean
-mean <- as.data.frame(tapply(activity$steps, activity$date, mean, na.rm = TRUE))
-names(mean)[1] <- "Mean"
-mean
+mean1 <- as.data.frame(tapply(activity$steps, activity$date, mean, na.rm = TRUE))
+names(mean1)[1] <- "Mean"
+mean1
 
 ## Median
 median <- as.data.frame(tapply(activity$steps, activity$date, median, na.rm = TRUE))
@@ -49,6 +49,12 @@ median
 
 ## What is the average daily activity pattern?
 
+1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+
+```{r}
+library(ggplot2)
+ggplot(activity, aes(interval, steps)) + stat_summary(fun = mean, geom = "line", na.rm = TRUE) + labs(y = "Average Steps", x = "Intervals", title = "The Average Number of Steps Taken Across All Days")
+```
 
 
 ## Imputing missing values
