@@ -427,3 +427,16 @@ When comparing the data with NAs to the data without we would notice that in the
 Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day
 
 
+```r
+weekday <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+activity$weekday <- factor((weekdays(activity$date) %in% weekday), levels = c(FALSE, TRUE), labels = c('Weekend', 'Weekday'))
+```
+
+2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
+
+
+```r
+ggplot(activity, aes(interval, steps)) + stat_summary(fun = mean, geom = "line", na.rm = TRUE) + labs(y = "Average Steps", x = "Intervals", title = "The Average Steps Taken Across All Weekends/Weekdays") + scale_x_datetime(date_breaks = "1 hour", date_labels = "%I:%M %p") + theme(axis.text.x = element_text(angle = 90), panel.grid.minor = element_blank(), panel.grid.major = element_blank()) + facet_wrap("weekday", ncol = 1)
+```
+
+![](PA1_template_files/figure-html/Week days Time Seris-1.png)<!-- -->
